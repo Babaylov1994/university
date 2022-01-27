@@ -1,11 +1,11 @@
-package com.foxminded.app.entity;
+package com.foxminded.university.entity;
 
 import java.util.List;
 import java.util.Objects;
 
 public class Schedule {
 
-    private Integer idLecture;
+    private int idLecture;
     private List<Lecture> lectures;
 
     public Schedule(Integer idLecture, List<Lecture> lectures) {
@@ -37,7 +37,7 @@ public class Schedule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Schedule schedule = (Schedule) o;
-        return Objects.equals(idLecture, schedule.idLecture) && Objects.equals(lectures, schedule.lectures);
+        return Objects.equals(idLecture, schedule.idLecture);
     }
 
     @Override

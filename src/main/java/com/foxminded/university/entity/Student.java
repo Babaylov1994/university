@@ -1,11 +1,11 @@
-package com.foxminded.app.entity;
+package com.foxminded.university.entity;
 
 import java.util.Objects;
 
 public class Student extends Person {
 
-    private Integer idStudent;
-    private Integer idGroup;
+    private int idStudent;
+    private int idGroup;
 
     public Student(String name, String lastName, Integer idStudent, Integer idGroup) {
         super(name, lastName);

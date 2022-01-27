@@ -1,11 +1,11 @@
-package com.foxminded.app.entity;
+package com.foxminded.university.entity;
 
 import java.util.List;
 import java.util.Objects;
 
 public class Department {
 
-    private Integer idDepartment;
+    private int idDepartment;
     private String name;
     private List<Group> groups;
 
@@ -47,7 +47,7 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(idDepartment, that.idDepartment) && Objects.equals(name, that.name) && Objects.equals(groups, that.groups);
+        return Objects.equals(idDepartment, that.idDepartment) && Objects.equals(name, that.name);
     }
 
     @Override
