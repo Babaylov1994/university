@@ -39,6 +39,8 @@ public class Teacher extends Person {
     public String toString() {
         return "Teacher{" +
             "idTeacher=" + idTeacher +
+            ", name='" + name + '\'' +
+            ", lastName='" + lastName +
             '}';
     }
 }

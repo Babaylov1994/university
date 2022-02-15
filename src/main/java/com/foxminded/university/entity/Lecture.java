@@ -9,7 +9,7 @@ public class Lecture {
 
     private int idLecture;
     private String name;
-    private Teacher teacher;
+    private int idTeacher;
     private LocalDate date;
     private LocalTime startLecture;
     private LocalTime endLecture;
@@ -18,7 +18,7 @@ public class Lecture {
     public Lecture(LectureBuilder builder) {
         this.idLecture = builder.idLecture;
         this.name = builder.name;
-        this.teacher = builder.teacher;
+        this.idTeacher = builder.idTeacher;
         this.date = builder.date;
         this.startLecture = builder.startLecture;
         this.endLecture = builder.endLecture;
@@ -28,14 +28,18 @@ public class Lecture {
     public static class LectureBuilder {
         private int idLecture;
         private String name;
-        private Teacher teacher;
+        private int idTeacher;
         private LocalDate date;
         private LocalTime startLecture;
         private LocalTime endLecture;
         private List<Group> groupList;
 
-        public LectureBuilder(int idLecture) {
+        public LectureBuilder() {
+        }
+
+        public LectureBuilder setIdLecture(int idLecture) {
             this.idLecture = idLecture;
+            return this;
         }
 
         public LectureBuilder setName(String name) {
@@ -43,8 +47,8 @@ public class Lecture {
             return this;
         }
 
-        public LectureBuilder setTeacher(Teacher teacher) {
-            this.teacher = teacher;
+        public LectureBuilder setIdTeacher(int idTeacher) {
+            this.idTeacher = idTeacher;
             return this;
         }
 
@@ -73,6 +77,34 @@ public class Lecture {
         }
     }
 
+    public int getIdLecture() {
+        return idLecture;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIdTeacher() {
+        return idTeacher;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartLecture() {
+        return startLecture;
+    }
+
+    public LocalTime getEndLecture() {
+        return endLecture;
+    }
+
+    public List<Group> getGroupList() {
+        return groupList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,7 +123,7 @@ public class Lecture {
         return "Lecture{" +
             "idLecture=" + idLecture +
             ", name='" + name + '\'' +
-            ", teacher=" + teacher +
+            ", idTeacher=" + idTeacher +
             ", date=" + date +
             ", startLecture=" + startLecture +
             ", endLecture=" + endLecture +

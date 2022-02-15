@@ -14,21 +14,22 @@ public class Student extends Person {
     }
 
     public Student() {
+        super();
     }
 
-    public Integer getIdStudent() {
+    public int getIdStudent() {
         return idStudent;
     }
 
-    public void setIdStudent(Integer idStudent) {
+    public void setIdStudent(int idStudent) {
         this.idStudent = idStudent;
     }
 
-    public Integer getIdGroup() {
+    public int getIdGroup() {
         return idGroup;
     }
 
-    public void setIdGroup(Integer idGroup) {
+    public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
 
@@ -50,6 +51,9 @@ public class Student extends Person {
         return "Student{" +
             "idStudent=" + idStudent +
             ", idGroup=" + idGroup +
+            ", name='" + name + '\'' +
+            ", lastName='" + lastName +
             '}';
     }
+
 }

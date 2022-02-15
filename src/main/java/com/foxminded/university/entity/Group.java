@@ -6,11 +6,13 @@ import java.util.Objects;
 public class Group {
 
     private int idGroup;
+    private int idDepartment;
     private String name;
     private List<Student> students;
 
-    public Group(Integer idGroup, String name, List<Student> students) {
+    public Group(int idGroup, int idDepartment, String name, List<Student> students) {
         this.idGroup = idGroup;
+        this.idDepartment = idDepartment;
         this.name = name;
         this.students = students;
     }
@@ -24,6 +26,14 @@ public class Group {
 
     public void setIdGroup(Integer idGroup) {
         this.idGroup = idGroup;
+    }
+
+    public int getIdDepartment() {
+        return idDepartment;
+    }
+
+    public void setIdDepartment(int idDepartment) {
+        this.idDepartment = idDepartment;
     }
 
     public String getName() {
@@ -59,6 +69,7 @@ public class Group {
     public String toString() {
         return "Group{" +
             "idGroup=" + idGroup +
+            ", idDepartment=" + idDepartment +
             ", name='" + name + '\'' +
             ", students=" + students +
             '}';

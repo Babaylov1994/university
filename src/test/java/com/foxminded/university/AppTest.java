@@ -1,4 +1,4 @@
-package com.foxminded.app;
+package com.foxminded.university;
 
 import org.junit.jupiter.api.Test;
 
