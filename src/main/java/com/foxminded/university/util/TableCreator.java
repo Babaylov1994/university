@@ -13,8 +13,9 @@ import java.nio.file.Paths;
 public class TableCreator {
 
     private static final String PATH_TO_THE_SCHEMA = "src/main/resources/schema.sql";
+    private static final String PATH_TO_THE_DATA = "src/main/resources/data.sql";
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     TableCreator(DataSource dataSource) {
@@ -24,6 +25,13 @@ public class TableCreator {
     public void createTables() throws IOException {
         StringBuilder queryBuilder = new StringBuilder();
         Files.lines(Paths.get(PATH_TO_THE_SCHEMA)).forEach(queryBuilder::append);
+
+        jdbcTemplate.execute(queryBuilder.toString());
+    }
+
+    public void fillInData() throws IOException {
+        StringBuilder queryBuilder = new StringBuilder();
+        Files.lines(Paths.get(PATH_TO_THE_DATA)).forEach(queryBuilder::append);
 
         jdbcTemplate.execute(queryBuilder.toString());
     }

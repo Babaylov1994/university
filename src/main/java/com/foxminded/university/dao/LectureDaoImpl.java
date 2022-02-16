@@ -7,9 +7,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class LectureDaoImpl implements LectureDao{
+public class LectureDaoImpl implements LectureDao {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -26,26 +27,27 @@ public class LectureDaoImpl implements LectureDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
     @Override
-    public List<Lecture> getAllLectures() {
+    public List<Lecture> getAll() {
         return jdbcTemplate.query(SQL_GET_ALL_LECTURE, new LectureRowMapper());
     }
 
     @Override
-    public Lecture getLectureById(int id) {
-        return jdbcTemplate.queryForObject(SQL_GET_LECTURE_BY_ID, new LectureRowMapper(), id);
+    public Optional<Lecture> getById(Integer idLecture) {
+        return Optional.ofNullable(jdbcTemplate.queryForObject
+            (SQL_GET_LECTURE_BY_ID, new LectureRowMapper(), idLecture));
     }
 
     @Override
-    public boolean createNewLecture(Lecture lecture) {
+    public boolean create(Lecture lecture) {
         return jdbcTemplate.update(SQL_CREATE_NEW_LECTURE, lecture.getName(),
-            lecture.getIdTeacher(), lecture.getDate(), lecture.getStartLecture(), lecture.getEndLecture()) > 0;
+            lecture.getIdTeacher(), lecture.getDate(), lecture.getStartLecture(),
+            lecture.getEndLecture()) > 0;
     }
 
     @Override
-    public boolean removeLecture(int id) {
-        return jdbcTemplate.update(SQL_REMOVE_LECTURE, id) > 0;
+    public boolean delete(Integer idLecture) {
+        return jdbcTemplate.update(SQL_REMOVE_LECTURE, idLecture) > 0;
     }
 
     @Override

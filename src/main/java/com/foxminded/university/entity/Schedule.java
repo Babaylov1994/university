@@ -1,27 +1,38 @@
 package com.foxminded.university.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 public class Schedule {
 
-    private int idLecture;
+    private int idSchedule;
+    private LocalDate date;
     private List<Lecture> lectures;
 
-    public Schedule(Integer idLecture, List<Lecture> lectures) {
-        this.idLecture = idLecture;
+    public Schedule(int idSchedule, LocalDate date, List<Lecture> lectures) {
+        this.idSchedule = idSchedule;
+        this.date = date;
         this.lectures = lectures;
     }
 
     public Schedule() {
     }
 
-    public Integer getIdLecture() {
-        return idLecture;
+    public int getIdSchedule() {
+        return idSchedule;
     }
 
-    public void setIdLecture(Integer idLecture) {
-        this.idLecture = idLecture;
+    public void setIdSchedule(int idSchedule) {
+        this.idSchedule = idSchedule;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public List<Lecture> getLectures() {
@@ -37,18 +48,19 @@ public class Schedule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Schedule schedule = (Schedule) o;
-        return Objects.equals(idLecture, schedule.idLecture);
+        return Objects.equals(idSchedule, schedule.idSchedule);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idLecture);
+        return Objects.hash(idSchedule);
     }
 
     @Override
     public String toString() {
         return "Schedule{" +
-            "idLecture=" + idLecture +
+            "idSchedule=" + idSchedule +
+            ", date=" + date +
             ", lectures=" + lectures +
             '}';
     }

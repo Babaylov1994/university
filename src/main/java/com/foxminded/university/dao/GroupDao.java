@@ -5,15 +5,7 @@ import com.foxminded.university.entity.Student;
 
 import java.util.List;
 
-public interface GroupDao {
-
-    List<Group> getAllGroups();
-
-    Group getGroupById(int id);
-
-    boolean createNewGroup(Group group);
-
-    boolean removeGroup(int id);
+public interface GroupDao extends CrudDao<Group, Integer> {
 
     List<Student> getListStudentFromGroup(int idGroup);
 
