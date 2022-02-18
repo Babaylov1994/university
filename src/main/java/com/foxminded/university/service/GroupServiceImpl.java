@@ -3,7 +3,11 @@ package com.foxminded.university.service;
 import com.foxminded.university.dao.GroupDao;
 import com.foxminded.university.entity.Group;
 import com.foxminded.university.entity.Student;
+import com.foxminded.university.service.exceptions.DaoException;
+import com.foxminded.university.service.exceptions.SqlException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +26,20 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Optional<Group> getById(Integer idGroup) {
-        return groupDao.getById(idGroup);
+        try {
+            return groupDao.getById(idGroup);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new DaoException("Group with this id does not exist", exception);
+        }
     }
 
     @Override
     public boolean create(Group group) {
-        return groupDao.create(group);
+        try {
+            return groupDao.create(group);
+        } catch (DataIntegrityViolationException exception){
+            throw new SqlException("Name of group cannot be empty", exception);
+        }
     }
 
     @Override
@@ -42,6 +54,10 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public boolean addStudentInGroup(int idGroup, int idStudent) {
-        return groupDao.addStudentInGroup(idGroup, idStudent);
+        try {
+            return groupDao.addStudentInGroup(idGroup, idStudent);
+        } catch (DataIntegrityViolationException exception) {
+            throw new SqlException("Group with this id does not exist", exception);
+        }
     }
 }

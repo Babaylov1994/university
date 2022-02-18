@@ -2,7 +2,11 @@ package com.foxminded.university.service;
 
 import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.entity.Lecture;
+import com.foxminded.university.service.exceptions.DaoException;
+import com.foxminded.university.service.exceptions.SqlException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,12 +25,20 @@ public class LectureServiceImpl implements LectureService{
 
     @Override
     public Optional<Lecture> getById(Integer idLecture) {
-        return lectureDao.getById(idLecture);
+        try {
+            return lectureDao.getById(idLecture);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new DaoException("Lecture with this id does not exist", exception);
+        }
     }
 
     @Override
     public boolean create(Lecture lecture) {
-        return lectureDao.create(lecture);
+        try {
+            return lectureDao.create(lecture);
+        } catch (DataIntegrityViolationException exception) {
+            throw new SqlException("Name of lecture cannot be empty", exception);
+        }
     }
 
     @Override
@@ -35,7 +47,12 @@ public class LectureServiceImpl implements LectureService{
     }
 
     @Override
-    public boolean updateTeacherOfLecture(int idTeacher, int idSchedule) {
-        return lectureDao.updateTeacherOfLecture(idTeacher,idSchedule);
+    public boolean updateTeacherOfLecture(int idTeacher, int idLecture) {
+        try {
+            return lectureDao.updateTeacherOfLecture(idTeacher, idLecture);
+        } catch (DataIntegrityViolationException exception) {
+            throw new SqlException("Teacher with this id does not exist", exception);
+        }
+
     }
 }

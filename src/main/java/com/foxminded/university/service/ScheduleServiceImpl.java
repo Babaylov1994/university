@@ -2,7 +2,9 @@ package com.foxminded.university.service;
 
 import com.foxminded.university.dao.ScheduleDao;
 import com.foxminded.university.entity.Schedule;
+import com.foxminded.university.service.exceptions.DaoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public Optional<Schedule> getById(Integer idSchedule) {
-        return scheduleDao.getById(idSchedule);
+        try {
+            return scheduleDao.getById(idSchedule);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new DaoException("Schedule with this id does not exist", exception);
+        }
     }
 
     @Override

@@ -19,7 +19,7 @@ public class LectureDaoImpl implements LectureDao {
     private static final String SQL_CREATE_NEW_LECTURE = "INSERT INTO lecture(lecture_name, id_teacher, "
         + "date_lecture, start_lecture, end_lecture) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_REMOVE_LECTURE = "DELETE FROM lecture WHERE id_lecture = ?";
-    private static final String SQL_UPDATE_TEACHER_OF_LECTURE = "UPDATE FROM lecture SET id_teacher = ? " +
+    private static final String SQL_UPDATE_TEACHER_OF_LECTURE = "UPDATE lecture SET id_teacher = ? " +
         "WHERE id_lecture = ?";
 
     @Autowired
