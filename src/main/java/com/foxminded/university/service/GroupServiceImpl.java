@@ -38,7 +38,7 @@ public class GroupServiceImpl implements GroupService {
         try {
             return groupDao.create(group);
         } catch (DataIntegrityViolationException exception){
-            throw new SqlException("Name of group cannot be empty", exception);
+            throw new SqlException("Fill out all group fields", exception);
         }
     }
 

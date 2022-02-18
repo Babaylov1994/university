@@ -38,7 +38,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         try {
             return departmentDao.create(department);
         } catch (DataIntegrityViolationException exception) {
-            throw new SqlException("Name of department cannot be empty", exception);
+            throw new SqlException("Fill out all department fields", exception);
         }
     }
 

@@ -3,7 +3,9 @@ package com.foxminded.university.service;
 import com.foxminded.university.dao.ScheduleDao;
 import com.foxminded.university.entity.Schedule;
 import com.foxminded.university.service.exceptions.DaoException;
+import com.foxminded.university.service.exceptions.SqlException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 
     @Override
     public boolean create(Schedule schedule) {
-        return scheduleDao.create(schedule);
+        try {
+            return scheduleDao.create(schedule);
+        } catch (DataIntegrityViolationException exception) {
+            throw new SqlException("Fill out all schedule fields", exception);
+        }
+
     }
 
     @Override

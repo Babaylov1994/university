@@ -37,7 +37,7 @@ public class LectureServiceImpl implements LectureService{
         try {
             return lectureDao.create(lecture);
         } catch (DataIntegrityViolationException exception) {
-            throw new SqlException("Name of lecture cannot be empty", exception);
+            throw new SqlException("Fill out all lecture fields", exception);
         }
     }
 

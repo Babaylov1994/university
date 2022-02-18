@@ -32,5 +32,7 @@ public class Main {
         tableCreator.createTables();
         tableCreator.fillInData();
 
+        System.out.println(groupService.addStudentInGroup(1,6));
+
     }
 }

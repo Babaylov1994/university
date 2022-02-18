@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return teacherDao.create(teacher);
         } catch (DataIntegrityViolationException exception) {
-            throw new SqlException("first_name and last_name of teacher cannot be empty", exception);
+            throw new SqlException("Fill out all teacher fields", exception);
         }
     }
 

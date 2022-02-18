@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return studentDao.create(student);
         } catch (DataIntegrityViolationException exception) {
-            throw new SqlException("first_name and last_name of student cannot be empty", exception);
+            throw new SqlException("Fill out all student fields", exception);
         }
     }
 
