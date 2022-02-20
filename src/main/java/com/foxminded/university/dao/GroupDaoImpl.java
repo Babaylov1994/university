@@ -24,8 +24,9 @@ public class GroupDaoImpl implements GroupDao {
         "student.first_name, student.last_name, groups.id_group\n" +
         "FROM student JOIN groups ON student.id_group = groups.id_group\n" +
         "WHERE groups.id_group = ?";
-    private static final String SQL_ADD_STUDENT_IN_GROUP = "UPDATE student SET id_group = ?\n" +
-        "WHERE id_student = ?";
+    private static final String SQL_ADD_STUDENT_IN_GROUP = "UPDATE student SET id_group = ? WHERE id_student = (\n" +
+        " SELECT id_student FROM student WHERE id_student = ? \n" +
+        ") AND 1/(select count(*) from student where id_student = ?) IS NOT NULL";
 
     @Autowired
     public GroupDaoImpl(JdbcTemplate jdbcTemplate) {
@@ -60,6 +61,6 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public boolean addStudentInGroup(int idGroup, int idStudent) {
-        return jdbcTemplate.update(SQL_ADD_STUDENT_IN_GROUP, idGroup, idStudent) > 0;
+        return jdbcTemplate.update(SQL_ADD_STUDENT_IN_GROUP, idGroup, idStudent, idStudent) > 0;
     }
 }
