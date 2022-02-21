@@ -1,9 +1,9 @@
-package com.foxminded.university.service;
+package com.foxminded.university.service.student;
 
 import com.foxminded.university.dao.StudentDao;
 import com.foxminded.university.entity.Student;
-import com.foxminded.university.service.exceptions.DaoException;
-import com.foxminded.university.service.exceptions.SqlException;
+import com.foxminded.university.exceptions.DaoException;
+import com.foxminded.university.exceptions.SqlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

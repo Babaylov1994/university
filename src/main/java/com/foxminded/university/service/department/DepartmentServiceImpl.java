@@ -1,20 +1,20 @@
-package com.foxminded.university.service;
+package com.foxminded.university.service.department;
 
 import com.foxminded.university.dao.DepartmentDao;
-import com.foxminded.university.service.exceptions.DaoException;
+import com.foxminded.university.exceptions.DaoException;
 import com.foxminded.university.entity.Department;
-import com.foxminded.university.service.exceptions.SqlException;
+import com.foxminded.university.exceptions.SqlException;
+import com.foxminded.university.service.department.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentDao departmentDao;
