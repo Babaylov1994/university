@@ -27,7 +27,7 @@ public class Main {
         tableCreator.createTables();
         tableCreator.fillInData();
 
-        System.out.println(groupService.addStudentInGroup(1,2));
+        departmentService.getById(6);
 
     }
 }

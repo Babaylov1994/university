@@ -1,0 +1,62 @@
+1304 [main] DEBUG o.s.c.a.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@5b464ce8
+1353 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+1578 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\DepartmentDaoImpl.class]
+1581 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\GroupDaoImpl.class]
+1584 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\LectureDaoImpl.class]
+1586 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\ScheduleDaoImpl.class]
+1589 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\StudentDaoImpl.class]
+1591 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\dao\TeacherDaoImpl.class]
+1671 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\department\DepartmentServiceImpl.class]
+1673 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\group\GroupServiceImpl.class]
+1675 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\lecture\LectureServiceImpl.class]
+1678 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\schedule\ScheduleServiceImpl.class]
+1680 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\student\StudentServiceImpl.class]
+1683 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\service\teacher\TeacherServiceImpl.class]
+1694 [main] DEBUG o.s.c.a.ClassPathBeanDefinitionScanner - Identified candidate component class: file [D:\Nik\projects\university\target\classes\com\foxminded\university\util\TableCreator.class]
+1983 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+1992 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+1999 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+2003 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+2032 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'springJdbcConfig'
+2055 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Found key 'url' in PropertySource 'class path resource [database.properties]' with value of type String
+2063 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Found key 'driver' in PropertySource 'class path resource [database.properties]' with value of type String
+2065 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Found key 'dbUserName' in PropertySource 'class path resource [database.properties]' with value of type String
+2066 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Found key 'password' in PropertySource 'class path resource [database.properties]' with value of type String
+2066 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'departmentDaoImpl'
+2101 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTemplate'
+2121 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSource'
+2250 [main] DEBUG o.s.j.d.DriverManagerDataSource - Loaded JDBC driver: org.postgresql.Driver
+2278 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'dataSource'
+2318 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'departmentDaoImpl' via constructor to bean named 'jdbcTemplate'
+2322 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'groupDaoImpl'
+2326 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'groupDaoImpl' via constructor to bean named 'jdbcTemplate'
+2330 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'lectureDaoImpl'
+2333 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'lectureDaoImpl' via constructor to bean named 'jdbcTemplate'
+2335 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'scheduleDaoImpl'
+2338 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'scheduleDaoImpl' via constructor to bean named 'jdbcTemplate'
+2339 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'studentDaoImpl'
+2343 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'studentDaoImpl' via constructor to bean named 'jdbcTemplate'
+2345 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'teacherDaoImpl'
+2348 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'teacherDaoImpl' via constructor to bean named 'jdbcTemplate'
+2349 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'departmentServiceImpl'
+2356 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'groupServiceImpl'
+2358 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'lectureServiceImpl'
+2361 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'scheduleServiceImpl'
+2363 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'studentServiceImpl'
+2365 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'teacherServiceImpl'
+2367 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'tableCreator'
+2370 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'tableCreator' via constructor to bean named 'dataSource'
+2450 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing SQL statement [DROP TABLE IF EXISTS student;DROP TABLE IF EXISTS groups;DROP TABLE IF EXISTS lecture;DROP TABLE IF EXISTS schedule;DROP TABLE IF EXISTS department;DROP TABLE IF EXISTS teacher;CREATE TABLE schedule (    id_schedule SERIAL PRIMARY KEY,    date_schedule DATE);CREATE TABLE department (    id_department SERIAL PRIMARY KEY,    department_name VARCHAR(20) NOT NULL);CREATE TABLE teacher (    id_teacher SERIAL PRIMARY KEY,    first_name VARCHAR(20) NOT NULL,    last_name VARCHAR(50) NOT NULL);CREATE TABLE groups (    id_group SERIAL PRIMARY KEY,    group_name VARCHAR(20) NOT NULL,    id_department INT REFERENCES department(id_department) ON DELETE SET NULL ON UPDATE CASCADE);CREATE TABLE student (    id_student SERIAL PRIMARY KEY,    first_name VARCHAR(20) NOT NULL,    last_name VARCHAR(50) NOT NULL,    id_group INT REFERENCES groups(id_group) ON DELETE SET NULL ON UPDATE CASCADE );CREATE TABLE lecture (    id_lecture SERIAL PRIMARY KEY,    lecture_name VARCHAR(20) NOT NULL,    date_lecture DATE,    start_lecture TIME,    end_lecture TIME,    id_teacher INT REFERENCES teacher(id_teacher) ON DELETE SET NULL ON UPDATE CASCADE)]
+2462 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+2462 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:postgresql://localhost:5432/university]
+3844 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing SQL statement [INSERT INTO schedule (date_schedule) VALUES    ('14.02.2022'),    ('15.02.2022'),    ('16.02.2022');INSERT INTO department (department_name) VALUES    ('Gryffindor'),    ('Slytherin'),    ('Ravenclaw');INSERT INTO groups (id_department, group_name) VALUES    (1, 'aa-11'),    (2, 'bb-22'),    (3, 'cc-33');INSERT INTO student (id_group, first_name, last_name) VALUES    (2, 'Vova', 'Petrov'),    (2, 'Petr', 'Volkov'),    (1, 'Gosha', 'Dud');INSERT INTO teacher (first_name, last_name) VALUES    ('Galina', 'Petrova'),    ('Ekaterina', 'Volkova'),    ('Irina', 'Ivanova');INSERT INTO lecture (lecture_name, id_teacher, date_lecture, start_lecture, end_lecture) VALUES    ('Math', 1, '14.02.2022', '08:30:00', '10:00:00'),    ('English', 2, '14.02.2022', '10:15:00', '11:45:00')]
+3844 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+3844 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:postgresql://localhost:5432/university]
+4038 [main] DEBUG c.f.u.s.d.DepartmentService - Search department with id = 6
+4038 [main] DEBUG c.f.u.s.d.DepartmentService - Search department with id = 6
+4043 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+4044 [main] DEBUG o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT * FROM department WHERE id_department = ?]
+4044 [main] DEBUG o.s.jdbc.datasource.DataSourceUtils - Fetching JDBC Connection from DataSource
+4044 [main] DEBUG o.s.j.d.DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:postgresql://localhost:5432/university]
+4325 [main] ERROR c.f.u.s.d.DepartmentService - Department with this id does not exist
+4325 [main] ERROR c.f.u.s.d.DepartmentService - Department with this id does not exist
