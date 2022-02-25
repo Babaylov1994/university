@@ -27,7 +27,7 @@ public class Main {
         tableCreator.createTables();
         tableCreator.fillInData();
 
-        departmentService.getById(6);
+        departmentService.getById(2);
 
     }
 }

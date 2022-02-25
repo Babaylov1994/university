@@ -4,6 +4,9 @@ import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.entity.Lecture;
 import com.foxminded.university.exceptions.DaoException;
 import com.foxminded.university.exceptions.SqlException;
+import com.foxminded.university.service.department.DepartmentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,43 +18,56 @@ import java.util.Optional;
 @Service
 public class LectureServiceImpl implements LectureService{
 
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentService.class);
+
     @Autowired
     private LectureDao lectureDao;
 
     @Override
     public List<Lecture> getAll() {
+        logger.trace("Entered method getAll");
         return lectureDao.getAll();
     }
 
     @Override
     public Optional<Lecture> getById(Integer idLecture) {
+        logger.trace("Entered method getById");
         try {
+            logger.debug("Found lecture with id = " + idLecture);
             return lectureDao.getById(idLecture);
         } catch (EmptyResultDataAccessException exception) {
+            logger.error("Lecture with this id does not exist");
             throw new DaoException("Lecture with this id does not exist", exception);
         }
     }
 
     @Override
     public boolean create(Lecture lecture) {
+        logger.trace("Entered method create");
         try {
+            logger.debug("Create lecture: " + lecture);
             return lectureDao.create(lecture);
         } catch (DataIntegrityViolationException exception) {
+            logger.error("Fill out all lecture fields");
             throw new SqlException("Fill out all lecture fields", exception);
         }
     }
 
     @Override
     public boolean delete(Integer idLecture) {
+        logger.trace("Entered method delete");
         return lectureDao.delete(idLecture);
     }
 
     @Override
     public boolean updateTeacherOfLecture(int idTeacher, int idLecture) {
+        logger.trace("Entered method updateTeacherOfLecture");
         try {
+            logger.debug("Found teacher with id = " + idTeacher + "Found lecture with id = " + idLecture);
             return lectureDao.updateTeacherOfLecture(idTeacher, idLecture);
         } catch (DataIntegrityViolationException exception) {
-            throw new SqlException("Teacher with this id does not exist", exception);
+            logger.error("Teacher or lecture with this id does not exist");
+            throw new SqlException("Teacher or lecture with this id does not exist", exception);
         }
 
     }

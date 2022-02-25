@@ -25,14 +25,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getAll() {
-        logger.debug("Collect all departments to list");
+        logger.trace("Entered method getAll");
         return departmentDao.getAll();
     }
 
     @Override
     public Optional<Department> getById(Integer idDepartment) {
+        logger.trace("Entered method getByI");
         try {
-            logger.debug("Search department with id = " + idDepartment);
+            logger.debug("Found department with id = " + idDepartment);
             return departmentDao.getById(idDepartment);
         } catch (EmptyResultDataAccessException exception) {
             logger.error("Department with this id does not exist");
@@ -42,8 +43,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public boolean create(Department department) {
+        logger.trace("Entered method create");
         try {
-            logger.debug("start creating");
+            logger.debug("Create department: " + department);
             return departmentDao.create(department);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all department fields");
@@ -53,7 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public boolean delete(Integer idDepartment) {
-        logger.debug("start deleting");
+        logger.trace("Entered method delete");
         return departmentDao.delete(idDepartment);
     }
 }
