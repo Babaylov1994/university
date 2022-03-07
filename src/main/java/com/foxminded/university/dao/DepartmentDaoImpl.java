@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Component
 public class DepartmentDaoImpl implements DepartmentDao {
+
     private final JdbcTemplate jdbcTemplate;
 
     private static final String SQL_GET_ALL_DEPARTMENTS = "SELECT * FROM department";
