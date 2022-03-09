@@ -51,7 +51,9 @@
                 <td><a th:href="@{/student/{idStudent}(idStudent=${student.getIdStudent()})}"
                 th:text="${student.getName()}"></a>
                 <td th:text="${student.getLastName()}"></td>
-                <td th:text="${student.getIdGroup()}"></td>
+                <td th:each="group : ${groups}"
+                    th:if="${student.getIdGroup == group.getIdGroup}"
+                    th:text="${group.getName}"></td>
             </tr>
         </tbody>
         </table>

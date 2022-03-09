@@ -22,6 +22,7 @@ public class StudentController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("students", studentService.getAll());
+        model.addAttribute("groups", groupService.getAll());
         return "student/studentIndex";
     }
 
@@ -30,5 +31,6 @@ public class StudentController {
         model.addAttribute("student", studentService.getById(id).orElse(null));
         return "student/studentShow";
     }
+
 
 }
