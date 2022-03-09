@@ -25,6 +25,7 @@ public class GroupController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("group", groupService.getById(id).orElse(null));
+        model.addAttribute("students", groupService.getListStudentFromGroup(id));
         return "group/groupShow";
     }
 }

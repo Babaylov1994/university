@@ -17,13 +17,7 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
         <body>
-            <a th:text="${student.getIdStudent()}">VALUE</a>
-            <br/>
-            <a th:text="${student.getName()}">VALUE</a>
-            <br/>
-            <a th:text="${student.getLastName()}">VALUE</a>
-            <br/>
-            <a th:text="${student.getIdGroup()}">VALUE</a>
+            <h1 th:text="${student.getName()} + ' ' + ${student.getLastName()}">VALUE</h1>
             <br/>
         </body>
 </html>
