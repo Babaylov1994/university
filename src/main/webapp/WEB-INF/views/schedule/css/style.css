@@ -26,13 +26,11 @@ html {
   box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
 }
 */
-.month {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+.month h1 {
+    margin: auto;
 }
+
+
 /*
 .month {
   width: 100%;
