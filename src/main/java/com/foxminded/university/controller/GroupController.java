@@ -1,6 +1,5 @@
 package com.foxminded.university.controller;
 
-
 import com.foxminded.university.service.group.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

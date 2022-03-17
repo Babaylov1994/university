@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LectureServiceImpl implements LectureService{
+public class LectureServiceImpl implements LectureService {
 
     private static final Logger logger = LoggerFactory.getLogger(DepartmentService.class);
 
@@ -69,6 +69,5 @@ public class LectureServiceImpl implements LectureService{
             logger.error("Teacher or lecture with this id does not exist");
             throw new SqlException("Teacher or lecture with this id does not exist", exception);
         }
-
     }
 }

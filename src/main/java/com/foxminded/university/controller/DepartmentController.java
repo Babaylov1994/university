@@ -26,5 +26,4 @@ public class DepartmentController {
         model.addAttribute("department", departmentService.getById(id).orElse(null));
         return "department/departmentShow";
     }
-
 }

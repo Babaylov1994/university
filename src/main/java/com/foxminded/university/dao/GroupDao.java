@@ -10,5 +10,4 @@ public interface GroupDao extends CrudDao<Group, Integer> {
     List<Student> getListStudentFromGroup(int idGroup);
 
     boolean addStudentInGroup(int idGroup, int idStudent);
-
 }
