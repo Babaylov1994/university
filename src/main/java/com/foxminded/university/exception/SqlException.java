@@ -1,4 +1,4 @@
-package com.foxminded.university.exceptions;
+package com.foxminded.university.exception;
 
 public class SqlException extends RuntimeException {
 

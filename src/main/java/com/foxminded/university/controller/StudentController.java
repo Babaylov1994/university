@@ -1,4 +1,4 @@
-package com.foxminded.university.controllers;
+package com.foxminded.university.controller;
 
 import com.foxminded.university.service.group.GroupService;
 import com.foxminded.university.service.student.StudentService;

@@ -1,4 +1,4 @@
-package com.foxminded.university.controllers;
+package com.foxminded.university.controller;
 
 import com.foxminded.university.service.department.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

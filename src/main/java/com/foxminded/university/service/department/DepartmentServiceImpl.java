@@ -1,10 +1,9 @@
 package com.foxminded.university.service.department;
 
 import com.foxminded.university.dao.DepartmentDao;
-import com.foxminded.university.exceptions.DaoException;
+import com.foxminded.university.exception.DaoException;
 import com.foxminded.university.entity.Department;
-import com.foxminded.university.exceptions.SqlException;
-import com.foxminded.university.service.department.DepartmentService;
+import com.foxminded.university.exception.SqlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

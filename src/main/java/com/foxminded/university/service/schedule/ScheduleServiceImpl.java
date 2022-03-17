@@ -2,8 +2,8 @@ package com.foxminded.university.service.schedule;
 
 import com.foxminded.university.dao.ScheduleDao;
 import com.foxminded.university.entity.Schedule;
-import com.foxminded.university.exceptions.DaoException;
-import com.foxminded.university.exceptions.SqlException;
+import com.foxminded.university.exception.DaoException;
+import com.foxminded.university.exception.SqlException;
 import com.foxminded.university.service.department.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
