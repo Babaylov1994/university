@@ -9,6 +9,7 @@ import java.sql.SQLException;
 public class ScheduleRowMapper implements RowMapper<Schedule> {
     @Override
     public Schedule mapRow(ResultSet rs, int rowNum) throws SQLException {
+
         Schedule schedule = new Schedule();
         schedule.setIdSchedule(rs.getInt("id_schedule"));
         schedule.setDate(rs.getDate("date_schedule").toLocalDate());

@@ -2,8 +2,8 @@ package com.foxminded.university.service.teacher;
 
 import com.foxminded.university.dao.TeacherDao;
 import com.foxminded.university.entity.Teacher;
-import com.foxminded.university.exceptions.DaoException;
-import com.foxminded.university.exceptions.SqlException;
+import com.foxminded.university.exception.DaoException;
+import com.foxminded.university.exception.SqlException;
 import com.foxminded.university.service.department.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -16,7 +16,6 @@ public class LectureRowMapper implements RowMapper<Lecture> {
             .setDate(rs.getDate("date_lecture").toLocalDate())
             .setStartLecture(rs.getTime("start_lecture").toLocalTime())
             .setEndLecture(rs.getTime("end_lecture").toLocalTime()).build();
-
         return lecture;
     }
 }

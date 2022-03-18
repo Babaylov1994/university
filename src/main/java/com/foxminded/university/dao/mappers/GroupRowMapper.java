@@ -11,11 +11,9 @@ public class GroupRowMapper implements RowMapper<Group> {
     public Group mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Group group = new Group();
-
         group.setIdGroup(rs.getInt("id_group"));
         group.setIdDepartment(rs.getInt("id_department"));
         group.setName(rs.getString("group_name"));
-
         return group;
     }
 }

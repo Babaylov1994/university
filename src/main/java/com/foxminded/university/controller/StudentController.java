@@ -1,4 +1,4 @@
-package com.foxminded.university.controllers;
+package com.foxminded.university.controller;
 
 import com.foxminded.university.service.group.GroupService;
 import com.foxminded.university.service.student.StudentService;
@@ -31,6 +31,4 @@ public class StudentController {
         model.addAttribute("student", studentService.getById(id).orElse(null));
         return "student/studentShow";
     }
-
-
 }

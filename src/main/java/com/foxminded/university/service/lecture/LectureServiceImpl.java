@@ -2,8 +2,8 @@ package com.foxminded.university.service.lecture;
 
 import com.foxminded.university.dao.LectureDao;
 import com.foxminded.university.entity.Lecture;
-import com.foxminded.university.exceptions.DaoException;
-import com.foxminded.university.exceptions.SqlException;
+import com.foxminded.university.exception.DaoException;
+import com.foxminded.university.exception.SqlException;
 import com.foxminded.university.service.department.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LectureServiceImpl implements LectureService{
+public class LectureServiceImpl implements LectureService {
 
     private static final Logger logger = LoggerFactory.getLogger(DepartmentService.class);
 
@@ -69,6 +69,5 @@ public class LectureServiceImpl implements LectureService{
             logger.error("Teacher or lecture with this id does not exist");
             throw new SqlException("Teacher or lecture with this id does not exist", exception);
         }
-
     }
 }

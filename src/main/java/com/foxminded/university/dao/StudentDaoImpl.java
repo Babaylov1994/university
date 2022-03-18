@@ -15,9 +15,9 @@ public class StudentDaoImpl implements StudentDao {
     private final JdbcTemplate jdbcTemplate;
 
     private static final String SQL_GET_ALL_STUDENTS = "SELECT * FROM student";
-    private  static final String SQL_GET_STUDENT_BY_ID = "SELECT * FROM student WHERE id_student = ?";
-    private  static final String SQL_CREATE_NEW_STUDENT = "INSERT INTO student(first_name, last_name) VALUES (?,?)";
-    private  static final String SQL_REMOVE_STUDENT = "DELETE FROM student WHERE id_student = ?";
+    private static final String SQL_GET_STUDENT_BY_ID = "SELECT * FROM student WHERE id_student = ?";
+    private static final String SQL_CREATE_NEW_STUDENT = "INSERT INTO student(first_name, last_name) VALUES (?,?)";
+    private static final String SQL_REMOVE_STUDENT = "DELETE FROM student WHERE id_student = ?";
 
     @Autowired
     public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
