@@ -18,6 +18,7 @@ public class StudentDaoImpl implements StudentDao {
     private static final String SQL_GET_STUDENT_BY_ID = "SELECT * FROM student WHERE id_student = ?";
     private static final String SQL_CREATE_NEW_STUDENT = "INSERT INTO student(first_name, last_name) VALUES (?,?)";
     private static final String SQL_REMOVE_STUDENT = "DELETE FROM student WHERE id_student = ?";
+    private static final String SQL_UPDATE_STUDENT = "UPDATE student SET first_name = ?, last_name = ?, id_group = ? WHERE id_student = ?";
 
     @Autowired
     public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
@@ -43,5 +44,11 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public boolean delete(Integer idStudent) {
         return jdbcTemplate.update(SQL_REMOVE_STUDENT, idStudent) > 0;
+    }
+
+    @Override
+    public boolean update(int idStudent, Student student) {
+        return jdbcTemplate.update(SQL_UPDATE_STUDENT, student.getName(),
+            student.getLastName(), student.getIdGroup(), idStudent) > 0;
     }
 }
