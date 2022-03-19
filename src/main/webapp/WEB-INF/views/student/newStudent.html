@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Student</title>
+        <title>Create Student</title>
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet"
@@ -22,15 +22,36 @@
         </script>
     </head>
     <body>
-        <h1 th:text="${student.getName()} + ' ' + ${student.getLastName()}">VALUE</h1>
-        <br/>
-            <a th:href="@{/student/{id}/edit(id=${student.getIdStudent()})}">Edit</a>
-        </div>
-        <br/>
-        <br/>
 
-        <form th:method="DELETE" th:action="@{/student/{id}(id=${student.getIdStudent()})}">
-            <input type="submit" value="Delete">
-        </form>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/university" class="navbar-brand">University</a>
+            </div>
+        </div>
+
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/university/department/">Departments</a></li>
+                <li><a href="/university/group/">Groups</a></li>
+                <li class="active"><a href="student/">Students</a></li>
+                <li><a href="/university/teacher/">Teachers</a></li>
+                <li><a href="/university/schedule/">Schedule</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <form th:method="POST" th:action="@{/student}" th:object="${student}">
+        <label for="name">Enter name: </label>
+        <input type="text" class="form-control" th:field="*{name}" id="name"/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <label for="lastName">Enter lastname: </label>
+        <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+        <br/>
+        <input type="submit" value="Create"/>
+    </form>
     </body>
 </html>

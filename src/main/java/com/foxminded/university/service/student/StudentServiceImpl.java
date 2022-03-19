@@ -58,4 +58,10 @@ public class StudentServiceImpl implements StudentService {
         logger.trace("Entered method delete");
         return studentDao.delete(idStudent);
     }
+
+    @Override
+    public boolean update(int idStudent, Student student) {
+        logger.trace("Entered method update");
+        return studentDao.update(idStudent, student);
+    }
 }
