@@ -53,7 +53,7 @@ public class StudentController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("student") Student student, @PathVariable("id") int id) {
        studentService.update(id, student);
-        return "redirect:/student";
+       return "redirect:/student";
     }
 
     @DeleteMapping("/{id}")
