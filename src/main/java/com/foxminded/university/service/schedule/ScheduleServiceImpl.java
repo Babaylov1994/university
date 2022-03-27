@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +25,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleDao scheduleDao;
 
     @Override
+    @Transactional
     public List<Schedule> getAll() {
         logger.trace("Entered method getAll");
         return scheduleDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Schedule> getById(Integer idSchedule) {
         logger.trace("Entered method getById");
         try {
@@ -42,11 +45,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public boolean create(Schedule schedule) {
+    @Transactional
+    public void create(Schedule schedule) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create schedule: " + schedule);
-            return scheduleDao.create(schedule);
+            scheduleDao.create(schedule);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all schedule fields");
             throw new SqlException("Fill out all schedule fields", exception);
@@ -54,8 +58,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public boolean delete(Integer idSchedule) {
+    @Transactional
+    public void delete(Integer idSchedule) {
         logger.trace("Entered method delete");
-        return scheduleDao.delete(idSchedule);
+        scheduleDao.delete(idSchedule);
     }
 }

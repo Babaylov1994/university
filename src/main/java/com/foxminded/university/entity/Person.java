@@ -1,10 +1,14 @@
 package com.foxminded.university.entity;
 
-import java.util.Objects;
+import javax.persistence.*;
 
+@MappedSuperclass
 public abstract class Person {
 
+    @Column(name = "first_name")
     protected String name;
+
+    @Column(name = "last_name")
     protected String lastName;
 
     public Person(String name, String lastName) {

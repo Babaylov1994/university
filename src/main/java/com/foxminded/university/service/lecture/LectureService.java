@@ -5,5 +5,4 @@ import com.foxminded.university.service.CrudService;
 
 public interface LectureService extends CrudService<Lecture, Integer> {
 
-    boolean updateTeacherOfLecture(int idTeacher, int idLecture);
 }

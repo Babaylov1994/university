@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -23,12 +25,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
+    @Transactional
     public List<Department> getAll() {
         logger.trace("Entered method getAll");
         return departmentDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Department> getById(Integer idDepartment) {
         logger.trace("Entered method getByI");
         try {
@@ -41,11 +45,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public boolean create(Department department) {
+    @Transactional
+    public void create(Department department) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create department: " + department);
-            return departmentDao.create(department);
+            departmentDao.create(department);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all department fields");
             throw new SqlException("Fill out all department fields", exception);
@@ -53,8 +58,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public boolean delete(Integer idDepartment) {
+    @Transactional
+    public void delete(Integer idDepartment) {
         logger.trace("Entered method delete");
-        return departmentDao.delete(idDepartment);
+        departmentDao.delete(idDepartment);
     }
 }

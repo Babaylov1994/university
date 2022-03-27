@@ -6,5 +6,5 @@ import com.foxminded.university.service.CrudService;
 
 public interface StudentService extends CrudService<Student, Integer> {
 
-    boolean update(int idStudent, Student student);
+    void update(int id, Student student);
 }

@@ -1,39 +1,51 @@
 package com.foxminded.university.entity;
 
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "groups")
 public class Group {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_group")
     private int idGroup;
-    private int idDepartment;
-    private String name;
-    private List<Student> students;
 
-    public Group(int idGroup, int idDepartment, String name, List<Student> students) {
-        this.idGroup = idGroup;
-        this.idDepartment = idDepartment;
-        this.name = name;
-        this.students = students;
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_department")
+    private Department department;
+
+    @Column(name = "group_name")
+    private String name;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "group")
+    private List<Student> students;
 
     public Group() {
     }
 
-    public Integer getIdGroup() {
+    public Group(Department department, String name, List<Student> students) {
+        this.department = department;
+        this.name = name;
+        this.students = students;
+    }
+
+    public int getIdGroup() {
         return idGroup;
     }
 
-    public void setIdGroup(Integer idGroup) {
+    public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
 
-    public int getIdDepartment() {
-        return idDepartment;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setIdDepartment(int idDepartment) {
-        this.idDepartment = idDepartment;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getName() {
@@ -57,21 +69,20 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return Objects.equals(idGroup, group.idGroup) && Objects.equals(name, group.name);
+        return idGroup == group.idGroup;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idGroup, name);
+        return Objects.hash(idGroup);
     }
 
     @Override
     public String toString() {
         return "Group{" +
             "idGroup=" + idGroup +
-            ", idDepartment=" + idDepartment +
+            ", department=" + department +
             ", name='" + name + '\'' +
-            ", students=" + students +
             '}';
     }
 }

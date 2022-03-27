@@ -1,66 +1,54 @@
 package com.foxminded.university.dao;
 
-import com.foxminded.university.dao.mappers.GroupRowMapper;
-import com.foxminded.university.dao.mappers.StudentRowMapper;
 import com.foxminded.university.entity.Group;
 import com.foxminded.university.entity.Student;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class GroupDaoImpl implements GroupDao {
 
-    private final JdbcTemplate jdbcTemplate;
-
-    private static final String SQL_GET_ALL_GROUPS = "SELECT * FROM groups";
-    private static final String SQL_GET_GROUP_BY_ID = "SELECT * FROM groups WHERE id_group = ?";
-    private static final String SQL_CREATE_NEW_GROUP = "INSERT INTO groups(group_name) VALUES (?)";
-    private static final String SQL_REMOVE_GROUP = "DELETE FROM groups WHERE id_group = ?";
-    private static final String SQL_GET_STUDENTS_FROM_GROUP = "SELECT student.id_student, student.id_group, " +
-        "student.first_name, student.last_name, groups.id_group\n" +
-        "FROM student JOIN groups ON student.id_group = groups.id_group\n" +
-        "WHERE groups.id_group = ?";
-    private static final String SQL_ADD_STUDENT_IN_GROUP = "UPDATE student SET id_group = ? WHERE id_student = (\n" +
-        " SELECT id_student FROM student WHERE id_student = ? \n" +
-        ") AND 1/(select count(*) from student where id_student = ?) IS NOT NULL";
-
     @Autowired
-    public GroupDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Group> getAll() {
-        return jdbcTemplate.query(SQL_GET_ALL_GROUPS, new GroupRowMapper());
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Group", Group.class).getResultList();
     }
 
     @Override
     public Optional<Group> getById(Integer idGroup) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject
-            (SQL_GET_GROUP_BY_ID, new GroupRowMapper(), idGroup));
+        Session session = sessionFactory.getCurrentSession();
+        return Optional.ofNullable(session.get(Group.class, idGroup));
     }
 
     @Override
-    public boolean create(Group group) {
-        return jdbcTemplate.update(SQL_CREATE_NEW_GROUP, group.getName()) > 0;
+    public void create(Group group) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(group);
     }
 
     @Override
-    public boolean delete(Integer idGroup) {
-        return jdbcTemplate.update(SQL_REMOVE_GROUP, idGroup) > 0;
+    public void delete(Integer idGroup) {
+        Session session = sessionFactory.getCurrentSession();
+        Group group = session.get(Group.class, idGroup);
+        session.delete(group);
     }
 
     @Override
     public List<Student> getListStudentFromGroup(int idGroup) {
-        return jdbcTemplate.query(SQL_GET_STUDENTS_FROM_GROUP, new StudentRowMapper(), idGroup);
-    }
-
-    @Override
-    public boolean addStudentInGroup(int idGroup, int idStudent) {
-        return jdbcTemplate.update(SQL_ADD_STUDENT_IN_GROUP, idGroup, idStudent, idStudent) > 0;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("FROM Student student where student.group.id = :idGroup");
+        query.setParameter("idGroup", idGroup);
+        List<Student> listStudentsOfGroup = query.list();
+        return listStudentsOfGroup;
     }
 }

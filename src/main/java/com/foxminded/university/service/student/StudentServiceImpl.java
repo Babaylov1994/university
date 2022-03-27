@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +26,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Override
+    @Transactional
     public List<Student> getAll() {
         logger.trace("Entered method getAll");
         return studentDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Student> getById(Integer idStudent) {
         logger.trace("Entered method getById");
         try {
@@ -42,11 +46,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean create(Student student) {
+    @Transactional
+    public void create(Student student) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create student: " + student);
-            return studentDao.create(student);
+            studentDao.create(student);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all student fields");
             throw new SqlException("Fill out all student fields", exception);
@@ -54,14 +59,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean delete(Integer idStudent) {
+    @Transactional
+    public void delete(Integer idStudent) {
         logger.trace("Entered method delete");
-        return studentDao.delete(idStudent);
+        studentDao.delete(idStudent);
     }
 
     @Override
-    public boolean update(int idStudent, Student student) {
+    @Transactional
+    public void update(int idStudent, Student student) {
         logger.trace("Entered method update");
-        return studentDao.update(idStudent, student);
+        studentDao.update(idStudent, student);
     }
 }

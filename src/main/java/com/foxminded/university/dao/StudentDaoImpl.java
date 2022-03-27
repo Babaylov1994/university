@@ -1,54 +1,51 @@
 package com.foxminded.university.dao;
 
 import com.foxminded.university.entity.Student;
-import com.foxminded.university.dao.mappers.StudentRowMapper;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class StudentDaoImpl implements StudentDao {
 
-    private final JdbcTemplate jdbcTemplate;
-
-    private static final String SQL_GET_ALL_STUDENTS = "SELECT * FROM student";
-    private static final String SQL_GET_STUDENT_BY_ID = "SELECT * FROM student WHERE id_student = ?";
-    private static final String SQL_CREATE_NEW_STUDENT = "INSERT INTO student(first_name, last_name) VALUES (?,?)";
-    private static final String SQL_REMOVE_STUDENT = "DELETE FROM student WHERE id_student = ?";
-    private static final String SQL_UPDATE_STUDENT = "UPDATE student SET first_name = ?, last_name = ?, id_group = ? WHERE id_student = ?";
-
     @Autowired
-    public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Student> getAll() {
-        return  jdbcTemplate.query(SQL_GET_ALL_STUDENTS, new StudentRowMapper());
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Student", Student.class).getResultList();
     }
 
     @Override
     public Optional<Student> getById(Integer idStudent) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject
-            (SQL_GET_STUDENT_BY_ID, new StudentRowMapper(), idStudent));
+        Session session = sessionFactory.getCurrentSession();
+        return Optional.ofNullable(session.get(Student.class, idStudent));
     }
 
     @Override
-    public boolean create(Student student) {
-        return jdbcTemplate.update(SQL_CREATE_NEW_STUDENT, student.getName(), student.getLastName()) > 0;
+    public void create(Student student) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(student);
     }
 
     @Override
-    public boolean delete(Integer idStudent) {
-        return jdbcTemplate.update(SQL_REMOVE_STUDENT, idStudent) > 0;
+    public void delete(Integer idStudent) {
+        Session session = sessionFactory.getCurrentSession();
+        Student student = session.get(Student.class, idStudent);
+        session.delete(student);
     }
 
     @Override
-    public boolean update(int idStudent, Student student) {
-        return jdbcTemplate.update(SQL_UPDATE_STUDENT, student.getName(),
-            student.getLastName(), student.getIdGroup(), idStudent) > 0;
+    public void update(int idStudent, Student student) {
+        Session session = sessionFactory.getCurrentSession();
+        Student tempStudent = session.get(Student.class, idStudent);
+        tempStudent.setName(student.getName());
+        tempStudent.setLastName(student.getLastName());
+        session.update(tempStudent);
     }
 }

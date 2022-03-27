@@ -1,28 +1,46 @@
 package com.foxminded.university.entity;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "department")
 public class Department {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_department")
     private int idDepartment;
-    private String name;
-    private List<Group> groups;
 
-    public Department(Integer idDepartment, String name, List<Group> groups) {
-        this.idDepartment = idDepartment;
-        this.name = name;
-        this.groups = groups;
-    }
+    @Column(name = "department_name")
+    private String name;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
+    private List<Group> groups;
 
     public Department() {
     }
 
-    public Integer getIdDepartment() {
+    public Department(String name, List<Group> groups) {
+        this.name = name;
+        this.groups = groups;
+    }
+
+    public void addGroupToDepartment(Group group) {
+        if(groups == null) {
+            groups = new ArrayList<>();
+        }
+        groups.add(group);
+        group.setDepartment(this);
+    }
+
+    public int getIdDepartment() {
         return idDepartment;
     }
 
-    public void setIdDepartment(Integer idDepartment) {
+    public void setIdDepartment(int idDepartment) {
         this.idDepartment = idDepartment;
     }
 
@@ -47,12 +65,12 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(idDepartment, that.idDepartment) && Objects.equals(name, that.name);
+        return idDepartment == that.idDepartment;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idDepartment, name);
+        return Objects.hash(idDepartment);
     }
 
     @Override
@@ -60,7 +78,6 @@ public class Department {
         return "Department{" +
             "idDepartment=" + idDepartment +
             ", name='" + name + '\'' +
-            ", groups=" + groups +
             '}';
     }
 }

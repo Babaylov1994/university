@@ -40,20 +40,13 @@
             </ul>
         </div>
     </nav>
-
     <form th:method="PATCH" th:action="@{/student/{id}(id=${student.getIdStudent()})}" th:object="${student}">
         <label for="name">Enter name: </label>
         <input type="text" class="form-control" th:field="*{name}" id="name"/>
         <br/>
         <br/>
-        <br/>
-        <br/>
         <label for="lastname">Enter lastname: </label>
         <input type="text" class="form-control" th:field="*{lastName}" id="lastname"/>
-        <br/>
-        <br/>
-        <label for="idGroup">Enter idGroup: </label>
-        <input type="text" class="form-control" th:field="*{idGroup}" id="idGroup"/>
         <br/>
         <br/>
         <input type="submit" value="Update"/>

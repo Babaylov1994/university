@@ -9,7 +9,7 @@ public interface CrudService<T, Id> {
 
     Optional<T> getById(Id id);
 
-    boolean create(T t);
+    void create(T t);
 
-    boolean delete (Id id);
+    void delete (Id id);
 }

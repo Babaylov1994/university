@@ -10,5 +10,4 @@ public interface GroupService extends CrudService<Group, Integer> {
 
     List<Student> getListStudentFromGroup(int idGroup);
 
-    boolean addStudentInGroup(int idGroup, int idStudent);
 }

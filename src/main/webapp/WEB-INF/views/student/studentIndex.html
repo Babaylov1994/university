@@ -53,12 +53,12 @@
 
         <tbody>
             <tr th:each="student : ${students}">
-                <td><a th:href="@{/student/{idStudent}(idStudent=${student.getIdStudent()})}"
-                    th:text="${student.getName()}">
+                <td><a th:href="@{/student/{idStudent}(idStudent=${student.getIdStudent})}"
+                    th:text="${student.getName}">
                     </a>
-                <td th:text="${student.getLastName()}"></td>
+                <td th:text="${student.getLastName}"></td>
                 <td th:each="group : ${groups}"
-                    th:if="${student.getIdGroup == group.getIdGroup}"
+                    th:if="${student.getGroup.getIdGroup == group.getIdGroup}"
                     th:text="${group.getName}">
                 </td>
             </tr>

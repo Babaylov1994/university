@@ -1,12 +1,12 @@
 package com.foxminded.university.controller;
 
+import com.foxminded.university.entity.Group;
 import com.foxminded.university.entity.Student;
 import com.foxminded.university.service.group.GroupService;
 import com.foxminded.university.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -33,13 +33,16 @@ public class StudentController {
     }
 
     @GetMapping("/new")
-    public String newPerson(Model model) {
+    public String newStudent(Model model) {
         model.addAttribute("student", new Student());
+        model.addAttribute("group", new Group());
+        model.addAttribute("groups", groupService.getAll());
         return "student/newStudent";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("student") Student student) {
+    public String create(Student student, Group group) {
+        student.setGroup(groupService.getById(group.getIdGroup()).orElse(null));
         studentService.create(student);
         return "redirect:/student";
     }

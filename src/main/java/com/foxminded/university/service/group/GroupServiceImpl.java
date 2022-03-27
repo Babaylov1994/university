@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,12 +26,14 @@ public class GroupServiceImpl implements GroupService {
     private GroupDao groupDao;
 
     @Override
+    @Transactional
     public List<Group> getAll() {
         logger.trace("Entered method getAll");
         return groupDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Group> getById(Integer idGroup) {
         logger.trace("Entered method getById");
         try {
@@ -43,11 +46,12 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public boolean create(Group group) {
+    @Transactional
+    public void create(Group group) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create group: " + group);
-            return groupDao.create(group);
+            groupDao.create(group);
         } catch (DataIntegrityViolationException exception){
             logger.error("Fill out all group fields");
             throw new SqlException("Fill out all group fields", exception);
@@ -55,26 +59,16 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public boolean delete(Integer idGroup) {
+    @Transactional
+    public void delete(Integer idGroup) {
         logger.trace("Entered method delete");
-        return groupDao.delete(idGroup);
+        groupDao.delete(idGroup);
     }
 
     @Override
+    @Transactional
     public List<Student> getListStudentFromGroup(int idGroup) {
         logger.trace("Entered method getListStudentFromGroup");
         return groupDao.getListStudentFromGroup(idGroup);
-    }
-
-    @Override
-    public boolean addStudentInGroup(int idGroup, int idStudent) {
-        logger.trace("Entered method addStudentInGroup");
-        try {
-            logger.debug("Found group with id = " + idGroup + "Found student with id = " + idStudent);
-            return groupDao.addStudentInGroup(idGroup, idStudent);
-        } catch (DataIntegrityViolationException exception) {
-            logger.error("Group or student with this id does not exist");
-            throw new SqlException("Group or student with this id does not exist", exception);
-        }
     }
 }

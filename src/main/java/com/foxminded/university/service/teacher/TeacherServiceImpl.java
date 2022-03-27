@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +25,14 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
 
     @Override
+    @Transactional
     public List<Teacher> getAll() {
         logger.trace("Entered method getAll");
         return teacherDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Teacher> getById(Integer idTeacher) {
         logger.trace("Entered method getById");
         try {
@@ -42,11 +45,12 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public boolean create(Teacher teacher) {
+    @Transactional
+    public void create(Teacher teacher) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create teacher: " + teacher);
-            return teacherDao.create(teacher);
+            teacherDao.create(teacher);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all teacher fields");
             throw new SqlException("Fill out all teacher fields", exception);
@@ -54,8 +58,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public boolean delete(Integer idTeacher) {
+    @Transactional
+    public void delete(Integer idTeacher) {
         logger.trace("Entered method delete");
-        return teacherDao.delete(idTeacher);
+        teacherDao.delete(idTeacher);
     }
 }
