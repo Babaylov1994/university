@@ -26,7 +26,7 @@ public class LectureServiceImpl implements LectureService {
 
     @Override
     @Transactional
-    public List<Lecture> getAll() {
+    public Optional<List<Lecture>> getAll() {
         logger.trace("Entered method getAll");
         return lectureDao.getAll();
     }

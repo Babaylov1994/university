@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public List<Student> getAll() {
+    public Optional<List<Student>> getAll() {
         logger.trace("Entered method getAll");
         return studentDao.getAll();
     }

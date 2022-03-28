@@ -16,9 +16,10 @@ public class TeacherDaoImpl implements TeacherDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Teacher> getAll() {
+    public Optional<List<Teacher>> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Teacher", Teacher.class).getResultList();
+        return Optional.ofNullable(session.createQuery("FROM Teacher", Teacher.class).
+            getResultList());
     }
 
     @Override

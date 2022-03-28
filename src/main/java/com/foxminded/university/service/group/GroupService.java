@@ -5,9 +5,10 @@ import com.foxminded.university.entity.Student;
 import com.foxminded.university.service.CrudService;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupService extends CrudService<Group, Integer> {
 
-    List<Student> getListStudentFromGroup(int idGroup);
+    Optional<List<Student>> getListStudentFromGroup(int idGroup);
 
 }

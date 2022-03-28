@@ -19,9 +19,10 @@ public class GroupDaoImpl implements GroupDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Group> getAll() {
+    public Optional<List<Group>> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Group", Group.class).getResultList();
+        return Optional.ofNullable(session.createQuery("FROM Group", Group.class).
+            getResultList());
     }
 
     @Override
@@ -44,11 +45,11 @@ public class GroupDaoImpl implements GroupDao {
     }
 
     @Override
-    public List<Student> getListStudentFromGroup(int idGroup) {
+    public Optional<List<Student>> getListStudentFromGroup(int idGroup) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("FROM Student student where student.group.id = :idGroup");
         query.setParameter("idGroup", idGroup);
         List<Student> listStudentsOfGroup = query.list();
-        return listStudentsOfGroup;
+        return Optional.ofNullable(listStudentsOfGroup);
     }
 }

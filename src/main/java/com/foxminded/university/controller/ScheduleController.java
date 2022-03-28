@@ -16,7 +16,7 @@ public class ScheduleController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("lectures", lectureService.getAll());
+        model.addAttribute("lectures", lectureService.getAll().orElse(null));
         return "schedule/scheduleIndex";
     }
 }

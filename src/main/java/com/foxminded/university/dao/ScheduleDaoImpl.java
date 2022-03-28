@@ -5,7 +5,6 @@ import com.foxminded.university.entity.Schedule;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,9 +17,10 @@ public class ScheduleDaoImpl implements ScheduleDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Schedule> getAll() {
+    public Optional<List<Schedule>> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Schedule", Schedule.class).getResultList();
+        return Optional.ofNullable(session.createQuery("FROM Schedule", Schedule.class).
+            getResultList());
     }
 
     @Override

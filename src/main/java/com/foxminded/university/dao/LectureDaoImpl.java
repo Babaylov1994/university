@@ -16,9 +16,10 @@ public class LectureDaoImpl implements LectureDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Lecture> getAll() {
+    public Optional<List<Lecture>> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Lecture", Lecture.class).getResultList();
+        return Optional.ofNullable(session.createQuery("FROM Lecture", Lecture.class).
+            getResultList());
     }
 
     @Override

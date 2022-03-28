@@ -17,7 +17,7 @@ public class DepartmentController {
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("departments", departmentService.getAll());
+        model.addAttribute("departments", departmentService.getAll().orElse(null));
         return "department/departmentIndex";
     }
 

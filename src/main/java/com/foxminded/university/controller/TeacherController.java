@@ -17,7 +17,7 @@ public class TeacherController {
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("teachers", teacherService.getAll());
+        model.addAttribute("teachers", teacherService.getAll().orElse(null));
         return "teacher/teacherIndex";
     }
 

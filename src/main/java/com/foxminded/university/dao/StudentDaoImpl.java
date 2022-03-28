@@ -16,9 +16,10 @@ public class StudentDaoImpl implements StudentDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Student> getAll() {
+    public Optional<List<Student>> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Student", Student.class).getResultList();
+        return Optional.ofNullable(session.createQuery("FROM Student", Student.class).
+            getResultList());
     }
 
     @Override

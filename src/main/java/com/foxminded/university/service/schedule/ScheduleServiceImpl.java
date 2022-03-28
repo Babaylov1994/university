@@ -26,7 +26,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public List<Schedule> getAll() {
+    public Optional<List<Schedule>> getAll() {
         logger.trace("Entered method getAll");
         return scheduleDao.getAll();
     }

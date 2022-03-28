@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface CrudService<T, Id> {
 
-    List<T> getAll();
+    Optional<List<T>> getAll();
 
     Optional<T> getById(Id id);
 

@@ -26,7 +26,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     @Transactional
-    public List<Teacher> getAll() {
+    public Optional<List<Teacher>> getAll() {
         logger.trace("Entered method getAll");
         return teacherDao.getAll();
     }

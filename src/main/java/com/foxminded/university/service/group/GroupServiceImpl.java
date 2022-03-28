@@ -27,7 +27,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public List<Group> getAll() {
+    public Optional<List<Group>> getAll() {
         logger.trace("Entered method getAll");
         return groupDao.getAll();
     }
@@ -67,7 +67,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional
-    public List<Student> getListStudentFromGroup(int idGroup) {
+    public Optional<List<Student>> getListStudentFromGroup(int idGroup) {
         logger.trace("Entered method getListStudentFromGroup");
         return groupDao.getListStudentFromGroup(idGroup);
     }

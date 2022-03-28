@@ -26,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Transactional
-    public List<Department> getAll() {
+    public Optional<List<Department>> getAll() {
         logger.trace("Entered method getAll");
         return departmentDao.getAll();
     }

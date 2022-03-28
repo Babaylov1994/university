@@ -17,14 +17,15 @@ public class GroupController {
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("groups", groupService.getAll());
+        model.addAttribute("groups", groupService.getAll().orElse(null));
         return "group/groupIndex";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("group", groupService.getById(id).orElse(null));
-        model.addAttribute("students", groupService.getListStudentFromGroup(id));
+        model.addAttribute("students",
+            groupService.getListStudentFromGroup(id).orElse(null));
         return "group/groupShow";
     }
 }
