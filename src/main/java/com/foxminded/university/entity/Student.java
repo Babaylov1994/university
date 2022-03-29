@@ -1,20 +1,37 @@
 package com.foxminded.university.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "student")
 public class Student extends Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_student")
     private int idStudent;
-    private int idGroup;
 
-    public Student(String name, String lastName, Integer idStudent, Integer idGroup) {
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_group")
+    private Group group;
+
+    public Student(String name, String lastName, int idStudent, Group group) {
         super(name, lastName);
         this.idStudent = idStudent;
-        this.idGroup = idGroup;
+        this.group = group;
     }
 
     public Student() {
-        super();
+    }
+
+    public Student(String name, String lastName, int idStudent) {
+        super(name, lastName);
+        this.idStudent = idStudent;
+    }
+
+    public Student(int idStudent) {
+        this.idStudent = idStudent;
     }
 
     public int getIdStudent() {
@@ -25,12 +42,12 @@ public class Student extends Person {
         this.idStudent = idStudent;
     }
 
-    public int getIdGroup() {
-        return idGroup;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     @Override
@@ -38,21 +55,21 @@ public class Student extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(idStudent, student.idStudent) && Objects.equals(idGroup, student.idGroup);
+        return idStudent == student.idStudent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idStudent, idGroup);
+        return Objects.hash(idStudent);
     }
 
     @Override
     public String toString() {
         return "Student{" +
-            "idStudent=" + idStudent +
-            ", idGroup=" + idGroup +
-            ", name='" + name + '\'' +
-            ", lastName='" + lastName +
+            "name='" + name + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", idStudent=" + idStudent +
+            ", group=" + group +
             '}';
     }
 }

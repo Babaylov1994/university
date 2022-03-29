@@ -41,15 +41,23 @@
         </div>
     </nav>
 
-    <form th:method="POST" th:action="@{/student}" th:object="${student}">
+    <form th:method="POST" th:action="@{/student}">
         <label for="name">Enter name: </label>
-        <input type="text" class="form-control" th:field="*{name}" id="name"/>
-        <br/>
-        <br/>
+        <input type="text" class="form-control" th:field="*{student.name}" id="name"/>
         <br/>
         <br/>
         <label for="lastName">Enter lastname: </label>
-        <input type="text" class="form-control" th:field="*{lastName}" id="lastName"/>
+        <input type="text" class="form-control" th:field="*{student.lastName}" id="lastName"/>
+        <br/>
+        <br/>
+        <label for="idGroup">Select group: </label>
+            <select class="form-control" th:field="*{group.idGroup}" id="idGroup" >
+                <option th:each="gr : ${groups}"
+                        th:value="${gr.getIdGroup}"
+                        th:text="${gr.getName}">
+                </option>
+            </select>
+        <br/>
         <br/>
         <input type="submit" value="Create"/>
     </form>

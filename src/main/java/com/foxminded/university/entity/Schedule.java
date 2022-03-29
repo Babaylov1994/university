@@ -1,13 +1,24 @@
 package com.foxminded.university.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "schedule")
 public class Schedule {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_schedule")
     private int idSchedule;
+
+    @Column(name = "date_schedule")
     private LocalDate date;
+
+    @OneToMany()
+    @JoinColumn(name = "id_lecture")
     private List<Lecture> lectures;
 
     public Schedule(int idSchedule, LocalDate date, List<Lecture> lectures) {

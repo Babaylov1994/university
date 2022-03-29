@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,12 +25,14 @@ public class LectureServiceImpl implements LectureService {
     private LectureDao lectureDao;
 
     @Override
-    public List<Lecture> getAll() {
+    @Transactional
+    public Optional<List<Lecture>> getAll() {
         logger.trace("Entered method getAll");
         return lectureDao.getAll();
     }
 
     @Override
+    @Transactional
     public Optional<Lecture> getById(Integer idLecture) {
         logger.trace("Entered method getById");
         try {
@@ -42,11 +45,12 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public boolean create(Lecture lecture) {
+    @Transactional
+    public void create(Lecture lecture) {
         logger.trace("Entered method create");
         try {
             logger.debug("Create lecture: " + lecture);
-            return lectureDao.create(lecture);
+            lectureDao.create(lecture);
         } catch (DataIntegrityViolationException exception) {
             logger.error("Fill out all lecture fields");
             throw new SqlException("Fill out all lecture fields", exception);
@@ -54,20 +58,9 @@ public class LectureServiceImpl implements LectureService {
     }
 
     @Override
-    public boolean delete(Integer idLecture) {
+    @Transactional
+    public void delete(Integer idLecture) {
         logger.trace("Entered method delete");
-        return lectureDao.delete(idLecture);
-    }
-
-    @Override
-    public boolean updateTeacherOfLecture(int idTeacher, int idLecture) {
-        logger.trace("Entered method updateTeacherOfLecture");
-        try {
-            logger.debug("Found teacher with id = " + idTeacher + "Found lecture with id = " + idLecture);
-            return lectureDao.updateTeacherOfLecture(idTeacher, idLecture);
-        } catch (DataIntegrityViolationException exception) {
-            logger.error("Teacher or lecture with this id does not exist");
-            throw new SqlException("Teacher or lecture with this id does not exist", exception);
-        }
+        lectureDao.delete(idLecture);
     }
 }

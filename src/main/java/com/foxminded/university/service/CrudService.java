@@ -5,11 +5,11 @@ import java.util.Optional;
 
 public interface CrudService<T, Id> {
 
-    List<T> getAll();
+    Optional<List<T>> getAll();
 
     Optional<T> getById(Id id);
 
-    boolean create(T t);
+    void create(T t);
 
-    boolean delete (Id id);
+    void delete (Id id);
 }

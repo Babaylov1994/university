@@ -1,9 +1,15 @@
 package com.foxminded.university.entity;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "teacher")
 public class Teacher extends Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_teacher")
     private Integer idTeacher;
 
     public Teacher(String name, String lastName, Integer idTeacher) {
