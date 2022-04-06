@@ -1,6 +1,6 @@
-package com.foxminded.university.controller;
+package com.foxminded.university.rest;
 
-import com.foxminded.university.service.department.DepartmentService;
+import com.foxminded.university.service.group.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/department")
-public class DepartmentController {
+@RequestMapping("/group")
+public class GroupController {
 
     @Autowired
-    private DepartmentService departmentService;
+    private GroupService groupService;
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("departments", departmentService.getAll().orElse(null));
-        return "department/departmentIndex";
+        model.addAttribute("groups", groupService.getAll().orElse(null));
+        return "group/groupIndex";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("department", departmentService.getById(id).orElse(null));
-        return "department/departmentShow";
+        model.addAttribute("group", groupService.getById(id).orElse(null));
+        model.addAttribute("students",
+            groupService.getListStudentFromGroup(id).orElse(null));
+        return "group/groupShow";
     }
 }

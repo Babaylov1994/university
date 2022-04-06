@@ -1,4 +1,4 @@
-package com.foxminded.university.controller;
+package com.foxminded.university.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

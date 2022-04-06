@@ -1,4 +1,4 @@
-package com.foxminded.university.controller;
+package com.foxminded.university.rest;
 
 import com.foxminded.university.entity.Group;
 import com.foxminded.university.entity.Student;

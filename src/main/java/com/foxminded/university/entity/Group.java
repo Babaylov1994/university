@@ -13,7 +13,7 @@ public class Group {
     @Column(name = "id_group")
     private int idGroup;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_department")
     private Department department;
 

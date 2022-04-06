@@ -1,4 +1,4 @@
-package com.foxminded.university.controller;
+package com.foxminded.university.rest;
 
 import com.foxminded.university.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;

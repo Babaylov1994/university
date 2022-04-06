@@ -1,6 +1,9 @@
 package com.foxminded.university.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +21,7 @@ public class Department {
     private String name;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
+    @JsonIgnore
     private List<Group> groups;
 
     public Department() {
