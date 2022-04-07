@@ -1,32 +1,41 @@
 package com.foxminded.university.rest;
 
 import com.foxminded.university.entity.Department;
+import com.foxminded.university.rest.exception_handling.IncorrectData;
+import com.foxminded.university.rest.exception_handling.NoSuchEntityException;
 import com.foxminded.university.service.department.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/department")
 public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
 
-    @GetMapping("/department")
+    @GetMapping
     public List<Department> getAllDepartments() {
         return departmentService.getAll().orElse(null);
     }
 
-    @GetMapping("/department/{id}")
+    @GetMapping("/{id}")
     public Department getDepartmentById(@PathVariable("id") int id) {
+        Department department = departmentService.getById(id).orElse(null);
+        if (department == null) {
+            throw new NoSuchEntityException("There is no department with id = " +
+                id + " in database");
+        }
         return departmentService.getById(id).orElse(null);
+    }
+
+    @PostMapping
+    public Department addNewDepartment(@RequestBody Department department) {
+        departmentService.create(department);
+        return department;
     }
 }

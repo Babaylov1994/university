@@ -17,19 +17,21 @@ public class Group {
     @JoinColumn(name = "id_department")
     private Department department;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_lecture")
+    private Lecture lecture;
+
     @Column(name = "group_name")
     private String name;
-
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "group")
-    private List<Student> students;
 
     public Group() {
     }
 
-    public Group(Department department, String name, List<Student> students) {
+    public Group(int idGroup, Department department, Lecture lecture, String name) {
+        this.idGroup = idGroup;
         this.department = department;
+        this.lecture = lecture;
         this.name = name;
-        this.students = students;
     }
 
     public int getIdGroup() {
@@ -48,20 +50,20 @@ public class Group {
         this.department = department;
     }
 
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
     }
 
     @Override
@@ -75,14 +77,5 @@ public class Group {
     @Override
     public int hashCode() {
         return Objects.hash(idGroup);
-    }
-
-    @Override
-    public String toString() {
-        return "Group{" +
-            "idGroup=" + idGroup +
-            ", department=" + department +
-            ", name='" + name + '\'' +
-            '}';
     }
 }

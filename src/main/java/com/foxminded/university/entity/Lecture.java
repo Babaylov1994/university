@@ -22,6 +22,10 @@ public class Lecture {
     @JoinColumn(name = "id_teacher")
     private Teacher lectureTeacher;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_schedule")
+    private Schedule schedule;
+
     @Column(name = "date_lecture")
     private LocalDate date;
 
@@ -31,18 +35,14 @@ public class Lecture {
     @Column(name = "end_lecture")
     private LocalTime endLecture;
 
-    @OneToMany()
-    @JoinColumn(name = "id_group")
-    private List<Group> groupList;
-
     public Lecture(LectureBuilder builder) {
         this.idLecture = builder.idLecture;
         this.name = builder.name;
         this.lectureTeacher = builder.lectureTeacher;
+        this.schedule = builder.schedule;
         this.date = builder.date;
         this.startLecture = builder.startLecture;
         this.endLecture = builder.endLecture;
-        this.groupList = builder.groupList;
     }
 
     public Lecture() {
@@ -52,10 +52,10 @@ public class Lecture {
         private int idLecture;
         private String name;
         private Teacher lectureTeacher;
+        private Schedule schedule;
         private LocalDate date;
         private LocalTime startLecture;
         private LocalTime endLecture;
-        private List<Group> groupList;
 
         public LectureBuilder() {
         }
@@ -75,6 +75,11 @@ public class Lecture {
             return this;
         }
 
+        public LectureBuilder setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+            return this;
+        }
+
         public LectureBuilder setDate(LocalDate date) {
             this.date = date;
             return this;
@@ -87,11 +92,6 @@ public class Lecture {
 
         public LectureBuilder setEndLecture(LocalTime endLecture) {
             this.endLecture = endLecture;
-            return this;
-        }
-
-        public LectureBuilder setGroupList(List<Group> groupList) {
-            this.groupList = groupList;
             return this;
         }
 
@@ -112,6 +112,10 @@ public class Lecture {
         return lectureTeacher;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -122,10 +126,6 @@ public class Lecture {
 
     public LocalTime getEndLecture() {
         return endLecture;
-    }
-
-    public List<Group> getGroupList() {
-        return groupList;
     }
 
     @Override
@@ -139,18 +139,5 @@ public class Lecture {
     @Override
     public int hashCode() {
         return Objects.hash(idLecture, name);
-    }
-
-    @Override
-    public String toString() {
-        return "Lecture{" +
-            "idLecture=" + idLecture +
-            ", name='" + name + '\'' +
-            ", lectureTeacher=" + lectureTeacher +
-            ", date=" + date +
-            ", startLecture=" + startLecture +
-            ", endLecture=" + endLecture +
-            ", groupList=" + groupList +
-            '}';
     }
 }

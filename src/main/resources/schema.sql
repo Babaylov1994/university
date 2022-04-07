@@ -13,7 +13,6 @@ CREATE TABLE schedule (
 CREATE TABLE department (
     id_department SERIAL PRIMARY KEY,
     department_name VARCHAR(20) NOT NULL
-
 );
 
 CREATE TABLE teacher (
@@ -22,10 +21,21 @@ CREATE TABLE teacher (
     last_name VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE lecture (
+    id_lecture SERIAL PRIMARY KEY,
+    lecture_name VARCHAR(20) NOT NULL,
+    date_lecture DATE,
+    start_lecture TIME,
+    end_lecture TIME,
+    id_teacher INT REFERENCES teacher(id_teacher) ON DELETE SET NULL ON UPDATE CASCADE,
+    id_schedule INT REFERENCES schedule(id_schedule) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
 CREATE TABLE groups (
     id_group SERIAL PRIMARY KEY,
     group_name VARCHAR(20) NOT NULL,
-    id_department INT REFERENCES department(id_department) ON DELETE SET NULL ON UPDATE CASCADE
+    id_department INT REFERENCES department(id_department) ON DELETE SET NULL ON UPDATE CASCADE,
+    id_lecture INT REFERENCES lecture(id_lecture) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE student (
@@ -33,13 +43,4 @@ CREATE TABLE student (
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     id_group INT REFERENCES groups(id_group) ON DELETE SET NULL ON UPDATE CASCADE
- );
-
-CREATE TABLE lecture (
-    id_lecture SERIAL PRIMARY KEY,
-    lecture_name VARCHAR(20) NOT NULL,
-    date_lecture DATE,
-    start_lecture TIME,
-    end_lecture TIME,
-    id_teacher INT REFERENCES teacher(id_teacher) ON DELETE SET NULL ON UPDATE CASCADE
-)
+ )

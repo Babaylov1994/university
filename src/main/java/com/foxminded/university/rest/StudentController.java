@@ -2,14 +2,19 @@ package com.foxminded.university.rest;
 
 import com.foxminded.university.entity.Group;
 import com.foxminded.university.entity.Student;
+import com.foxminded.university.rest.exception_handling.IncorrectData;
+import com.foxminded.university.rest.exception_handling.NoSuchEntityException;
 import com.foxminded.university.service.group.GroupService;
 import com.foxminded.university.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/student")
 public class StudentController {
 
@@ -20,48 +25,45 @@ public class StudentController {
     private GroupService groupService;
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("students", studentService.getAll().orElse(null));
-        model.addAttribute("groups", groupService.getAll().orElse(null));
-        return "student/studentIndex";
+    public List<Student> getAllStudents() {
+        return studentService.getAll().orElse(null);
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("student", studentService.getById(id).orElse(null));
-        return "student/studentShow";
-    }
-
-    @GetMapping("/new")
-    public String newStudent(Model model) {
-        model.addAttribute("student", new Student());
-        model.addAttribute("group", new Group());
-        model.addAttribute("groups", groupService.getAll().orElse(null));
-        return "student/newStudent";
+    public Student getStudentById(@PathVariable("id") int id) {
+        Student student = studentService.getById(id).orElse(null);
+        if (student == null) {
+            throw new NoSuchEntityException("There is no student with id = " +
+                id + " in database");
+        }
+        return studentService.getById(id).orElse(null);
     }
 
     @PostMapping()
-    public String create(Student student, Group group) {
-        student.setGroup(groupService.getById(group.getIdGroup()).orElse(null));
+    public Student addNewStudent(@RequestBody Student student) {
         studentService.create(student);
-        return "redirect:/student";
+        return student;
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("student", studentService.getById(id).orElse(null));
-        return "student/editStudent";
-    }
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("student") Student student, @PathVariable("id") int id) {
-       studentService.update(id, student);
-       return "redirect:/student";
+    @PutMapping()
+    public Student update(@RequestBody Student student) {
+       Student updatingStudent = studentService.getById(student.getIdStudent()).orElse(null);
+       if (updatingStudent == null) {
+           throw new NoSuchEntityException("There is no student with id = " +
+               student.getIdStudent() + " in database");
+       }
+       studentService.update(student.getIdStudent(), student);
+       return student;
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
+        Student student = studentService.getById(id).orElse(null);
+        if (student == null) {
+            throw new NoSuchEntityException("There is no student with id = " +
+                id + " in database");
+        }
         studentService.delete(id);
-        return "redirect:/student";
+        return "Student with id = " + id + " was deleted";
     }
 }

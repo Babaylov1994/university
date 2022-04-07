@@ -20,24 +20,12 @@ public class Department {
     @Column(name = "department_name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "department")
-    @JsonIgnore
-    private List<Group> groups;
-
     public Department() {
     }
 
-    public Department(String name, List<Group> groups) {
+    public Department(int idDepartment, String name) {
+        this.idDepartment = idDepartment;
         this.name = name;
-        this.groups = groups;
-    }
-
-    public void addGroupToDepartment(Group group) {
-        if(groups == null) {
-            groups = new ArrayList<>();
-        }
-        groups.add(group);
-        group.setDepartment(this);
     }
 
     public int getIdDepartment() {
@@ -56,14 +44,6 @@ public class Department {
         this.name = name;
     }
 
-    public List<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,13 +55,5 @@ public class Department {
     @Override
     public int hashCode() {
         return Objects.hash(idDepartment);
-    }
-
-    @Override
-    public String toString() {
-        return "Department{" +
-            "idDepartment=" + idDepartment +
-            ", name='" + name + '\'' +
-            '}';
     }
 }

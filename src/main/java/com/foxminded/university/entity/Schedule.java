@@ -17,17 +17,12 @@ public class Schedule {
     @Column(name = "date_schedule")
     private LocalDate date;
 
-    @OneToMany()
-    @JoinColumn(name = "id_lecture")
-    private List<Lecture> lectures;
-
-    public Schedule(int idSchedule, LocalDate date, List<Lecture> lectures) {
-        this.idSchedule = idSchedule;
-        this.date = date;
-        this.lectures = lectures;
+    public Schedule() {
     }
 
-    public Schedule() {
+    public Schedule(int idSchedule, LocalDate date) {
+        this.idSchedule = idSchedule;
+        this.date = date;
     }
 
     public int getIdSchedule() {
@@ -46,14 +41,6 @@ public class Schedule {
         this.date = date;
     }
 
-    public List<Lecture> getLectures() {
-        return lectures;
-    }
-
-    public void setLectures(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,14 +52,5 @@ public class Schedule {
     @Override
     public int hashCode() {
         return Objects.hash(idSchedule);
-    }
-
-    @Override
-    public String toString() {
-        return "Schedule{" +
-            "idSchedule=" + idSchedule +
-            ", date=" + date +
-            ", lectures=" + lectures +
-            '}';
     }
 }
