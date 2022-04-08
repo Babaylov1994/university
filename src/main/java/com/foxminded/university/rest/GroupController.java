@@ -6,6 +6,7 @@ import com.foxminded.university.entity.Student;
 import com.foxminded.university.rest.exception_handling.IncorrectData;
 import com.foxminded.university.rest.exception_handling.NoSuchEntityException;
 import com.foxminded.university.service.group.GroupService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,13 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping
+    @ApiOperation(value = "Returns list of groups")
     public List<Group> getAllGroups() {
         return groupService.getAll().orElse(null);
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Returns group by id")
     public Group getGroupById(@PathVariable("id") int id) {
         Group group = groupService.getById(id).orElse(null);
         if (group == null) {
@@ -36,11 +39,13 @@ public class GroupController {
     }
 
     @GetMapping("/{id}/studentsOfGroup")
+    @ApiOperation(value = "Returns list students of group")
     public List<Student> getStudentByGroup(@PathVariable("id") int id) {
         return groupService.getListStudentFromGroup(id).orElse(null);
     }
 
     @PostMapping
+    @ApiOperation(value = "Create new group")
     public Group addNewGroup(@RequestBody Group group) {
         groupService.create(group);
         return group;

@@ -6,6 +6,7 @@ import com.foxminded.university.rest.exception_handling.IncorrectData;
 import com.foxminded.university.rest.exception_handling.NoSuchEntityException;
 import com.foxminded.university.service.group.GroupService;
 import com.foxminded.university.service.student.StudentService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +26,13 @@ public class StudentController {
     private GroupService groupService;
 
     @GetMapping
+    @ApiOperation(value = "Returns list of students")
     public List<Student> getAllStudents() {
         return studentService.getAll().orElse(null);
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Returns student by id")
     public Student getStudentById(@PathVariable("id") int id) {
         Student student = studentService.getById(id).orElse(null);
         if (student == null) {
@@ -40,12 +43,14 @@ public class StudentController {
     }
 
     @PostMapping()
+    @ApiOperation(value = "Create new student")
     public Student addNewStudent(@RequestBody Student student) {
         studentService.create(student);
         return student;
     }
 
     @PutMapping()
+    @ApiOperation(value = "Update student")
     public Student update(@RequestBody Student student) {
        Student updatingStudent = studentService.getById(student.getIdStudent()).orElse(null);
        if (updatingStudent == null) {
@@ -57,6 +62,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Delete student")
     public String delete(@PathVariable("id") int id) {
         Student student = studentService.getById(id).orElse(null);
         if (student == null) {
